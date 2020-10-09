@@ -1,0 +1,65 @@
+SELECT
+    purchase_date,
+    purchase_id,
+    client_id,
+    client_age,
+    client_registration_age,
+    promotion_name,
+    category_name,
+    partner_name,
+    client_city,
+    city,
+    revenue,
+    quantity
+FROM
+    (
+    SELECT 
+        purchase_date,
+        purchase_id,
+        client_id,
+        promotion_name,
+        category_name,
+        partner_name,
+        (price * quantity) AS revenue,
+        quantity,
+        partner_id
+    FROM test.t_purchase AS l
+    JOIN
+        (
+        SELECT
+        partner_id,
+        promotion_name,
+        category_name,
+        partner_name
+        FROM test.t_promotion
+        )
+    AS r
+        ON l.partner_id=r.partner_id
+    HAVING 
+        status = 'Yes' 
+        AND toDate(parseDateTimeBestEffort(purchase_date)) >= '2020-05-01' 
+        AND toDate(parseDateTimeBestEffort(purchase_date)) <= '2020-08-01' 
+    ) AS l
+JOIN
+    (
+    SELECT
+        client_id,
+        dateDiff('year', toDateTime(birth_date), today()) AS client_age,
+        dateDiff('day', toDateTime(registration), today()) AS client_registration_age,
+        client_city,
+        client_city_id,
+        city
+    FROM test.t_clients AS l
+    JOIN
+        (
+        SELECT
+            client_city,
+            client_city_id,
+            city
+        FROM test.t_city
+        )
+    AS r
+        ON l.client_city_id=r.client_city_id
+    )
+AS r
+    ON l.client_id=r.client_id
