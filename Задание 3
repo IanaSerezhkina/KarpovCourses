@@ -23,7 +23,7 @@ FROM
         (price * quantity) AS revenue,
         quantity,
         partner_id
-    FROM test.t_purchase AS l
+    FROM purchase AS l
     JOIN
         (
         SELECT
@@ -31,12 +31,12 @@ FROM
         promotion_name,
         category_name,
         partner_name
-        FROM test.t_promotion
+        FROM promotion
         )
     AS r
         ON l.partner_id=r.partner_id
     HAVING 
-        status = 'Yes' 
+        status = 1 
         AND toDate(parseDateTimeBestEffort(purchase_date)) >= '2020-05-01' 
         AND toDate(parseDateTimeBestEffort(purchase_date)) <= '2020-08-01' 
     ) AS l
@@ -49,14 +49,14 @@ JOIN
         client_city,
         client_city_id,
         city
-    FROM test.t_clients AS l
+    FROM clients AS l
     JOIN
         (
         SELECT
             client_city,
             client_city_id,
             city
-        FROM test.t_city
+        FROM city
         )
     AS r
         ON l.client_city_id=r.client_city_id
