@@ -2,7 +2,7 @@
 
 В таблице содержится информация о покупках. Необходимо, воспользовавшись этими данными, выяснить, какие пары товаров пользователи чаще всего покупают вместе. 
 
-**Решение:** <td><a href="https://github.com/IanaSerezhkina/KarpovCourses/blob/main/%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%201.ipynb" target="_blank"><b>Задание 3</b></a></td>
+**Решение:** <td><a href="https://github.com/IanaSerezhkina/KarpovCourses/blob/main/%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%201.ipynb" target="_blank"><b>Задание 1</b></a></td>
 
 Для решения я использовала библиотеку mlxtend и её модуль apriori. 
 
