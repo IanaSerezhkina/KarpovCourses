@@ -76,7 +76,7 @@ FROM
         AS r
             ON l.client_id=r.client_id AND l.purchase_date=r.first_purchase
             HAVING 
-                status = '1' 
+                status = 1 
                 AND toDate(purchase_date) >= '2020-05-01' 
                 AND toDate(purchase_date) <= '2020-08-01'
         ) AS l
